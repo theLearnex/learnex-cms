@@ -9,15 +9,26 @@ class crud
 		$this->db = $DB_con;
 	}
 	
-	public function create($fname,$lname,$email,$contact)
+	public function create($fname,$lname,$email,$mobile,$password,$gender,$dob,$zipcode,$about_me,$basic_information,$work_education,$slogan)
 	{
 		try
 		{
-			$stmt = $this->db->prepare("INSERT INTO tbl_users(first_name,last_name,email_id,mobile) VALUES(:fname, :lname, :email, :contact)");
+			$stmt = $this->db->prepare("INSERT INTO tbl_users(first_name,last_name,email_id,mobile,password,gender,dob,zipcode,about_me,basic_information,work_education,slogan,zone,state,city) VALUES(:fname, :lname, :email, :mobile, :password, :gender, :dob, :zipcode, :about_me, :basic_information, :work_education, :slogan, :zone, :state, :city)");
 			$stmt->bindparam(":fname",$fname);
 			$stmt->bindparam(":lname",$lname);
 			$stmt->bindparam(":email",$email);
-			$stmt->bindparam(":contact",$contact);
+			$stmt->bindparam(":mobile",$mobile);
+			$stmt->bindparam(":password",$password);
+			$stmt->bindparam(":gender",$gender);
+			$stmt->bindparam(":dob",$dob);
+			$stmt->bindparam(":zipcode",$zipcode);
+			$stmt->bindparam(":about_me",$about_me);
+			$stmt->bindparam(":basic_information",$basic_information);
+			$stmt->bindparam(":work_education",$work_education);
+			$stmt->bindparam(":slogan",$slogan);
+			$stmt->bindparam(":zone",$zone);
+			$stmt->bindparam(":state",$state);
+			$stmt->bindparam(":city",$city);
 			$stmt->execute();
 			return true;
 		}
@@ -37,19 +48,41 @@ class crud
 		return $editRow;
 	}
 	
-	public function update($id,$fname,$lname,$email,$contact)
+	public function update($id,$fname,$lname,$email,$mobile,$password,$gender,$dob,$zipcode,$about_me,$basic_information,$work_education,$slogan,$zone,$state,$city)
 	{
 		try
 		{
 			$stmt=$this->db->prepare("UPDATE tbl_users SET first_name=:fname, 
 		                                               last_name=:lname, 
 													   email_id=:email, 
-													   mobile=:contact
+													   mobile=:mobile,
+													   password=:password,
+													   gender=:gender,
+													   dob=:dob,
+													   zipcode=:zipcode,
+													   about_me=:about_me,
+													   basic_information=:basic_information,
+													   work_education=:work_education,
+													   slogan=:slogan,
+													   zone=:zone,
+													   state=:state,
+													   city=:city
 													WHERE id=:id ");
 			$stmt->bindparam(":fname",$fname);
 			$stmt->bindparam(":lname",$lname);
 			$stmt->bindparam(":email",$email);
-			$stmt->bindparam(":contact",$contact);
+			$stmt->bindparam(":mobile",$mobile);
+			$stmt->bindparam(":password",$password);
+			$stmt->bindparam(":gender",$gender);
+			$stmt->bindparam(":dob",$dob);
+			$stmt->bindparam(":zipcode",$zipcode);
+			$stmt->bindparam(":about_me",$about_me);
+			$stmt->bindparam(":basic_information",$basic_information);
+			$stmt->bindparam(":work_education",$work_education);
+			$stmt->bindparam(":slogan",$slogan);
+			$stmt->bindparam(":zone",$zone);
+			$stmt->bindparam(":state",$state);
+			$stmt->bindparam(":city",$city);
 			$stmt->bindparam(":id",$id);
 			$stmt->execute();
 			
