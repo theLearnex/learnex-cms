@@ -1,5 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
     <script type="text/javascript">
 $(document).ready(function()
 {
@@ -70,9 +71,10 @@ if(isset($_POST['btn-save']))
     $basic_information = $_POST['basic_information'];
     $work_education = $_POST['work_education'];
     $slogan = $_POST['slogan'];
-    $zone = $_POST['zone'];
-    $state = $_POST['state'];
-    $city = $_POST['city'];
+    $zone = $_POST['zone_id'];
+    $state = $_POST['state_id'];
+    $city = $_POST['city_id'];
+    
     
     if($crud->create($fname,$lname,$email,$mobile,$password,$gender,$dob,$zipcode, $about_me,$basic_information,$work_education,$slogan,$zone,$state,$city))
     {
@@ -112,7 +114,7 @@ if(isset($_POST['btn-save']))
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form  method="post" id="demo_form" data-parsley-validate="">
+                        <form  method="post" id="form" data-parsley-validate="" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="email">Email address</label>
@@ -124,7 +126,7 @@ if(isset($_POST['btn-save']))
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">User Image</label>
-                                    <input type="file" id="exampleInputFile">
+                                  <input type="file" name="image" id="image">
                                 </div>
                                  <!-- select -->
                             <div class="form-group">
@@ -196,7 +198,7 @@ if(isset($_POST['btn-save']))
                            <!-- select -->
                             <div class="form-group">
                                 <label>Select Zone *</label>
-                                <select name="zone" class="form-control zone" id="zone-list" required>
+                                <select name="zone_id" class="form-control zone"  required>
                                 <option value="">Select Zone</option>
                                 <?php
 	$stmt = $DB_con->prepare("SELECT * FROM zone");
@@ -211,7 +213,7 @@ if(isset($_POST['btn-save']))
                               </select>
                             <div class="form-group">
                                 <label>Select State *</label>
-                                <select name="state" class="form-control state" required>
+                                <select name="state_id" class="form-control state" required>
                                 <option selected="selected">Select State</option>
                               </select>
                               <img src="assets/images/ajax-loader.gif" id="loding1"></img>
@@ -219,7 +221,7 @@ if(isset($_POST['btn-save']))
                             <!-- select -->
                             <div class="form-group">
                                 <label>Select City *</label>
-                                <select name="city" class="form-control city" required>
+                                <select name="city_id" class="form-control city" required>
                                 <option>Select City</option>
                               </select>
                               <img src="assets/images/ajax-loader.gif" id="loding2"></img>
@@ -308,7 +310,7 @@ immediately after the control sidebar -->
      
      <script type="text/javascript">
 $(function () {
-  $('#demo-form').parsley().on('field:validated', function() {
+  $('#form').parsley().on('field:validated', function() {
     var ok = $('.parsley-error').length === 0;
     $('.bs-callout-info').toggleClass('hidden', !ok);
     $('.bs-callout-warning').toggleClass('hidden', ok);

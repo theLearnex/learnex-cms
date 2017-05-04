@@ -9,11 +9,11 @@ class crud
 		$this->db = $DB_con;
 	}
 	
-	public function create($fname,$lname,$email,$mobile,$password,$gender,$dob,$zipcode,$about_me,$basic_information,$work_education,$slogan)
+	public function create($fname,$lname,$email,$mobile,$password,$gender,$dob,$zipcode, $about_me,$basic_information,$work_education,$slogan,$zone,$state,$city)
 	{
 		try
 		{
-			$stmt = $this->db->prepare("INSERT INTO tbl_users(first_name,last_name,email_id,mobile,password,gender,dob,zipcode,about_me,basic_information,work_education,slogan,zone,state,city) VALUES(:fname, :lname, :email, :mobile, :password, :gender, :dob, :zipcode, :about_me, :basic_information, :work_education, :slogan, :zone, :state, :city)");
+			$stmt = $this->db->prepare("INSERT INTO tbl_users(first_name,last_name,email_id,mobile,password,gender,dob,zipcode,about_me,basic_information,work_education,slogan,zone_id,state_id,city_id) VALUES(:fname, :lname, :email, :mobile, :password, :gender, :dob, :zipcode, :about_me, :basic_information, :work_education, :slogan, :zone_id, :state_id, :city_id)");
 			$stmt->bindparam(":fname",$fname);
 			$stmt->bindparam(":lname",$lname);
 			$stmt->bindparam(":email",$email);
@@ -26,9 +26,9 @@ class crud
 			$stmt->bindparam(":basic_information",$basic_information);
 			$stmt->bindparam(":work_education",$work_education);
 			$stmt->bindparam(":slogan",$slogan);
-			$stmt->bindparam(":zone",$zone);
-			$stmt->bindparam(":state",$state);
-			$stmt->bindparam(":city",$city);
+			$stmt->bindparam(":zone_id",$zone);
+			$stmt->bindparam(":state_id",$state);
+			$stmt->bindparam(":city_id",$city);
 			$stmt->execute();
 			return true;
 		}
@@ -64,9 +64,9 @@ class crud
 													   basic_information=:basic_information,
 													   work_education=:work_education,
 													   slogan=:slogan,
-													   zone=:zone,
-													   state=:state,
-													   city=:city
+													   zone_id=:zone_id,
+													   state_id=:state_id,
+													   city_id=:city_id
 													WHERE id=:id ");
 			$stmt->bindparam(":fname",$fname);
 			$stmt->bindparam(":lname",$lname);
@@ -80,9 +80,9 @@ class crud
 			$stmt->bindparam(":basic_information",$basic_information);
 			$stmt->bindparam(":work_education",$work_education);
 			$stmt->bindparam(":slogan",$slogan);
-			$stmt->bindparam(":zone",$zone);
-			$stmt->bindparam(":state",$state);
-			$stmt->bindparam(":city",$city);
+			$stmt->bindparam(":zone_id",$zone);
+			$stmt->bindparam(":state_id",$state);
+			$stmt->bindparam(":city_id",$city);
 			$stmt->bindparam(":id",$id);
 			$stmt->execute();
 			
